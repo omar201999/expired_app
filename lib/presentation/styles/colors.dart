@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class AppColor{
   static const Color textButtonColor = Colors.blue;
   static const Color myButtonColor = Colors.blue;
-  static  const Color backGroundColorForTextFormField =Color(0xffffffff);
-  static  const Color borderColorForTextForField =Color(0xffffffff);
+  static  const Color backGroundColorForTextFormField =Color(0xffe5e5e5);
+  static  const Color borderColorForTextForField =Color(0xffe5e5e5);
   static const Color white = Color(0xFFFFFFFF);
   static const Color whitesMoke = Color(0xfff5f5f5);
   static const Color primaryColor = Color(0xff703dc2);
@@ -14,7 +14,7 @@ class AppColor{
   static const Color darkGrey = Color(0xff1f1f1f);
   static const Color cyanBlue = Color(0xff0062bd);
   static const Color lightCyanBlue = Color(0xffc7dcfb);
-  static const Color black = Colors.black;
+  static const Color black = Color(0xff333335);
   static const Color gold = Color(0xffe9a943);
   static const Color grey = Color(0xff9E9E9E);
   static const Color deepBlue = Color(0xFF005DA3);

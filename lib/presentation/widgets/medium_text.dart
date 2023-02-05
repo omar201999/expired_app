@@ -12,6 +12,7 @@ class MediumText extends StatelessWidget {
   final TextOverflow overflow;
   final TextAlign? textAlign;
   final String? fontFamily;
+  final FontWeight? fontWeight;
 
 
   const MediumText({
@@ -21,6 +22,7 @@ class MediumText extends StatelessWidget {
     this.fontSize = 24,
     this.maxLines = 3,
     this.fontFamily ,
+    this.fontWeight,
 
     this.overflow = TextOverflow.ellipsis,
     this.textAlign,
@@ -35,6 +37,8 @@ class MediumText extends StatelessWidget {
         color: color ?? AppColor.primaryColor,
         fontFamily:fontFamily?? 'Medium',
         fontSize: fontSize.sp,
+        fontWeight: fontWeight,
+
         overflow: overflow,
       ),
       maxLines: maxLines,

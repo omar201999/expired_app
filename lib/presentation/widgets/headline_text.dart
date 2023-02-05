@@ -15,6 +15,7 @@ class HeadLineText extends StatelessWidget {
   final TextOverflow overflow;
   final TextDecoration? decoration;
   final Color? decorationColor;
+  final FontWeight? fontWeight;
 
   const HeadLineText({
     Key? key,
@@ -26,6 +27,8 @@ class HeadLineText extends StatelessWidget {
     this.overflow = TextOverflow.ellipsis,
     this.isUpper = true,
     this.textAlign,
+    this.fontWeight,
+
     this.decoration,
     this.decorationColor,
   }) : super(key: key);
@@ -38,9 +41,11 @@ class HeadLineText extends StatelessWidget {
           color: color ?? AppColor.primaryColor,
           fontFamily:fontFamily?? 'SemiBold',
           fontSize: fontSize.sp,
+          fontWeight: fontWeight,
           overflow: overflow,
         decoration: decoration,
         decorationColor: decorationColor,
+
         decorationThickness: 2
       ),
       maxLines: maxLines,

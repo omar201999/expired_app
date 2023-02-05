@@ -17,6 +17,7 @@ class MyFormField extends StatelessWidget {
   final double borderRadius;
 
   final bool readOnly;
+  final bool autofocus;
 
   final TextInputType inputType;
 
@@ -32,7 +33,8 @@ class MyFormField extends StatelessWidget {
 
   const MyFormField({
     Key? key,
-    this.borderRadius = 15,
+    this.borderRadius = 25,
+    this.autofocus=false,
     this.borderColor=AppColor.borderColorForTextForField,
     required this.controller,
     required this.validateText,
@@ -51,13 +53,15 @@ class MyFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 56.h,
+    return Card(
+
+      elevation: 3,
       child: TextFormField(
         maxLines: maxLines,
         readOnly: readOnly,
         onChanged: onChanged,
         controller: controller,
+        autofocus: autofocus,
         validator: (value) {
           if (value!.isEmpty) {
             return validateText;
@@ -68,16 +72,16 @@ class MyFormField extends StatelessWidget {
         keyboardType: inputType,
         textAlign: textAlign,
         decoration: InputDecoration(
-          suffixIcon:prefix == null ? null : IconButton(
+          suffixIcon:suffix == null ? null : IconButton(
             onPressed: suffixPressed,
             icon: Icon(
               suffix,
-              color: AppColor.greyOfText,
+              color: const Color.fromRGBO(51, 51, 53, 0.5),
             ),
           ),
           prefixIcon: prefix == null ? null :Icon(
             prefix,
-            color: AppColor.greyOfText,
+            color: const Color.fromRGBO(51, 51, 53, 0.5),
           ),
           hintText: hintText ,
           labelText: labelText ,
@@ -85,14 +89,14 @@ class MyFormField extends StatelessWidget {
           labelStyle:
               const TextStyle(color: AppColor.greyOfText),
           hintStyle:
-              const TextStyle(color: AppColor.greyOfText,height:1),
-          border: const OutlineInputBorder(),
-          focusedBorder: OutlineInputBorder(
+              const TextStyle(color:  Color.fromRGBO(51, 51, 53, 0.5),height:1),
+          border: InputBorder.none,
+         /* focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderRadius.r),
             borderSide:  BorderSide(
                     color: borderColor,
                   ),
-          ),
+          ),*/
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderRadius.r),
             borderSide: const BorderSide(
@@ -105,14 +109,14 @@ class MyFormField extends StatelessWidget {
               color: AppColor.red,
             ),
           ),
-          enabledBorder: OutlineInputBorder(
+         /* enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderRadius.r),
             borderSide:  const BorderSide(
                     color: AppColor.lightGrey,
                     width: 2.0,
                   ),
-          ),
-          fillColor: AppColor.backGroundColorForTextFormField,
+          ),*/
+          fillColor: AppColor.white,
           filled: true,
         ),
         style: const TextStyle(color: AppColor.black),

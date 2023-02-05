@@ -41,7 +41,6 @@ class MyButton extends StatelessWidget {
         height: 56.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius.r),
-
           color: colorOfButton??AppColor.primaryColor,
           border: isBorder?Border.all(color: AppColor.black):null,
 
@@ -54,8 +53,9 @@ class MyButton extends StatelessWidget {
           child: HeadLineText(
             text: text,
             color: headLineTextColor,
-            fontSize: 18.sp,
+            fontSize: 24.sp,
             isUpper: isUpper,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),

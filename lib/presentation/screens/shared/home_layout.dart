@@ -1,4 +1,5 @@
 import 'package:expired_app/business_logic/home_layout_cubit/home_layout_cubit.dart';
+import 'package:expired_app/presentation/router/app_router_names.dart';
 import 'package:expired_app/presentation/widgets/headline_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,41 @@ class HomeLayout extends StatelessWidget {
       listener: (context,state) {},
         builder: (context,state) {
         return Scaffold(
-          appBar: AppBar(title:HeadLineText(text: HomeLayoutCubit.get(context).titlesAppbar[HomeLayoutCubit.get(context).currentIndex],fontSize: 24,),centerTitle: true),
+          floatingActionButton: HomeLayoutCubit.get(context).currentIndex==1?InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, AppRouterNames.rAddStoreScreenRoute);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(15.r)),
+                color: const Color(0xFFEBDDFF),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 3,
+                    blurRadius: 7,
+                    offset: const Offset(3, 0), // changes position of shadow
+                  ),
+                ],
+              ),
+
+              height: 60.h,
+              width: 60.w,
+              child: const Center(
+                child: Icon(Icons.add,color: AppColor.black,size:40 ),
+              ),
+            ),
+          ):null,
+          drawer: const Drawer(),
+          appBar: AppBar(
+              title:HeadLineText(text: HomeLayoutCubit.get(context).titlesAppbar[HomeLayoutCubit.get(context).currentIndex],fontSize: 24,),
+              centerTitle: true,
+            actions: const [
+              Icon(Icons.notification_add_outlined),
+              SizedBox(width: 5,),
+
+            ],
+          ),
           body: Padding(
             padding: EdgeInsets.all(18.r),
             child: HomeLayoutCubit.get(context).screens[HomeLayoutCubit.get(context).currentIndex],

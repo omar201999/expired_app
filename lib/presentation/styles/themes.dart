@@ -53,11 +53,11 @@ ThemeData lightTheme = ThemeData(
     //fontFamily: 'SemiBold',
     //cardColor: AppColor.white,
     cardTheme: CardTheme(
-      color: AppColor.white,
+      color:  AppColor.white,
       elevation: 0,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15.r),),
+        borderRadius: BorderRadius.all(Radius.circular(25.r),),
       ),
     ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -66,7 +66,9 @@ ThemeData lightTheme = ThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(15.r)),
     )
-
+  ),
+  drawerTheme: const DrawerThemeData(
+    backgroundColor: Color(0xfff7f2f9),
   )
 );
 
