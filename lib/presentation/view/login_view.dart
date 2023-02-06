@@ -31,16 +31,16 @@ class LoginView extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return Scaffold(
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Center(
-                  child: Form(
+        return Stack(
+          children: [
+            Scaffold(
+              body: Column(
+                children: [
+                  SizedBox(height:120.h),
+                  Form(
                     key: formKey,
                     child: Padding(
-                      padding:  EdgeInsets.all(16.r),
+                      padding:  EdgeInsets.all(35.r),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -100,19 +100,24 @@ class LoginView extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
+
+                ],
               ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(100.r),topRight:Radius.circular(100.r), ),
-                  color: const Color(0xFFE2D8F3),
-                ),
-                child: Image.asset(AssetsManager.loginImage,fit: BoxFit.fill,),
+            ),
+            Positioned(
+              bottom: 0,
+              right: -40.w,
+              left: -40.w,
+              child: Container(
+              height: 250.h,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(500.r),topRight:Radius.circular(500.r), ),
+                color: const Color(0xFFE2D8F3),
               ),
-            ],
-          ),
+              child: Image.asset(AssetsManager.loginImage,fit: BoxFit.fill,),
+            ),)
+          ],
         );
       },
     );
