@@ -20,6 +20,7 @@ class MyFormField extends StatelessWidget {
   final bool autofocus;
 
   final TextInputType inputType;
+  final Function()? onTap;
 
   final String? hintText;
   final String? labelText;
@@ -34,6 +35,8 @@ class MyFormField extends StatelessWidget {
   const MyFormField({
     Key? key,
     this.borderRadius = 25,
+    this.onTap,
+
     this.autofocus=false,
     this.borderColor=AppColor.borderColorForTextForField,
     required this.controller,
@@ -60,6 +63,7 @@ class MyFormField extends StatelessWidget {
         maxLines: maxLines,
         readOnly: readOnly,
         onChanged: onChanged,
+        onTap: onTap ?? (){},
         controller: controller,
         autofocus: autofocus,
         validator: (value) {

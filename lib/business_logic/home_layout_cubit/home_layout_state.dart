@@ -7,3 +7,4 @@ class HomeLayoutInitial extends HomeLayoutState {}
 
 class ChangeNavBarState extends HomeLayoutState {}
 
+class SelectedDateState extends HomeLayoutState {}
