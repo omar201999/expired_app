@@ -2,6 +2,7 @@
 import 'package:expired_app/business_logic/home_layout_cubit/home_layout_cubit.dart';
 import 'package:expired_app/presentation/screens/user/add_product_screen.dart';
 import 'package:expired_app/presentation/screens/user/add_store_screen.dart';
+import 'package:expired_app/presentation/screens/user/edit_prouduct_screen.dart';
 import 'package:expired_app/presentation/screens/user/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -48,6 +49,10 @@ class AppRouter {
         case AppRouterNames.rProductsScreenRoute:
         return MaterialPageRoute(
           builder: (_) =>   const ProductsScreen(),
+        );
+        case AppRouterNames.rEditProductScreenRoute:
+        return MaterialPageRoute(
+          builder: (_) =>   EditProductScreen(),
         );
       default:
         return null;

@@ -56,7 +56,7 @@ class ProductsScreen extends StatelessWidget {
           shrinkWrap: true,
           itemBuilder: (context,index) => InkWell(
             onTap: (){
-
+              Navigator.pushNamed(context, AppRouterNames.rEditProductScreenRoute);
             },
             child: Container(
               height: 95.h,

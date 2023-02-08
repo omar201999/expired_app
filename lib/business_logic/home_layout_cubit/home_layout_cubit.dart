@@ -26,7 +26,7 @@ class HomeLayoutCubit extends Cubit<HomeLayoutState> {
     currentIndex = index;
     emit(ChangeNavBarState());
   }
-  DateTime selectedDate = DateTime(2000);
+  DateTime selectedDate = DateTime.now();
 
   pickDate(BuildContext context) async {
     DateTime? selected = await showDatePicker(
