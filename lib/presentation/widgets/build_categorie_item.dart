@@ -1,5 +1,4 @@
 import 'package:expired_app/presentation/router/app_router_names.dart';
-import 'package:expired_app/presentation/screens/user/add_product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,16 +9,20 @@ class BuildCategoryItem extends StatelessWidget {
   final dynamic imageOfCategory;
   final String nameOfCategory;
   final bool imageOrNot;
+  final bool isFromAddCategory;
+  final TextEditingController? newCategoryNameController  ;
   const BuildCategoryItem({Key? key,
     required this.imageOfCategory,
     required this.imageOrNot,
-    required this.nameOfCategory
+    required this.nameOfCategory,
+    this.isFromAddCategory = false,
+   this.newCategoryNameController
 }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.pushNamed(context, AppRouterNames.rProductsScreenRoute);
+        isFromAddCategory ? newCategoryNameController!.text= nameOfCategory :Navigator.pushNamed(context, AppRouterNames.rProductsScreenRoute);
       },
       child: Container(
         height: 95.h,
