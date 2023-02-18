@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:expired_app/core/constants/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../constants/assets_manager.dart';
 import '../../router/app_router_names.dart';
 import '../../styles/colors.dart';
 

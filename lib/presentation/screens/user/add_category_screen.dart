@@ -1,7 +1,7 @@
+import 'package:expired_app/core/constants/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../constants/assets_manager.dart';
 import '../../styles/icon_broken.dart';
 import '../../widgets/build_categorie_item.dart';
 import '../../widgets/headline_text.dart';
