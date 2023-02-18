@@ -1,9 +1,9 @@
 
 import 'package:dio/dio.dart';
+import 'package:expired_app/core/constants/end_points.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import '../../constants/end_points.dart';
 
 
 class WebService {
@@ -13,7 +13,7 @@ class WebService {
   }
 
   static WebService? _this;
-  final String _baseURL = baseUrl;
+  final String _baseURL = baseApiUrl;
 
   Dio publicDio = Dio();
   Dio privateDio = Dio();

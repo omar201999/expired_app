@@ -1,8 +1,8 @@
-import 'package:expired_app/constants/assets_manager.dart';
+import 'package:expired_app/business_logic/user_cubit/user_cubit.dart';
+import 'package:expired_app/core/constants/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:expired_app/business_logic/login_cubit/login_cubit.dart';
 import 'package:expired_app/presentation/router/app_router_names.dart';
 import 'package:expired_app/presentation/styles/colors.dart';
 import 'package:expired_app/presentation/widgets/headline_text.dart';
@@ -20,14 +20,14 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LoginState>(
+    return BlocConsumer<UserCubit, UserStates>(
       listener: (context, state) {
-        if(state is LoginSuccessState)
+        if(state is LoginLoadedState)
         {
           //Navigator.pushNamedAndRemoveUntil(context, AppRouterNames.rHomeLayoutScreenRoute,(route) => false,arguments:context);
         }
         else if (state is LoginErrorState){
-          showToast(text:state.error, state: ToastStates.ERROR);
+          showToast(text:state.message, state: ToastStates.ERROR);
         }
       },
       builder: (context, state) {
@@ -75,10 +75,10 @@ class LoginView extends StatelessWidget {
                             borderColor:  const Color(0xffE5E5E5),
 
                             inputType: TextInputType.visiblePassword,
-                            suffix: LoginCubit.get(context).suffixIcon,
-                            isPassword: LoginCubit.get(context).isPassword,
+                            suffix: UserCubit.get(context).suffixIcon,
+                            isPassword: UserCubit.get(context).isPassword,
                             suffixPressed: () {
-                              LoginCubit.get(context).changePasswordVisibility();
+                              UserCubit.get(context).changePasswordVisibility();
                             },
                           ),
                           SizedBox(
@@ -109,13 +109,14 @@ class LoginView extends StatelessWidget {
               right: -40.w,
               left: -40.w,
               child: Container(
+                width: MediaQuery.of(context).size.width,
               height: 250.h,
               clipBehavior: Clip.antiAliasWithSaveLayer,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(500.r),topRight:Radius.circular(500.r), ),
                 color: const Color(0xFFE2D8F3),
               ),
-              child: Image.asset(AssetsManager.loginImage,fit: BoxFit.fill,),
+              child: Image.asset(AssetsManager.loginImage,fit: BoxFit.cover,),
             ),)
           ],
         );

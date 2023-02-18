@@ -1,3 +1,4 @@
+import 'package:expired_app/business_logic/global_cubit/global_cubit.dart';
 import 'package:expired_app/business_logic/home_layout_cubit/home_layout_cubit.dart';
 import 'package:expired_app/presentation/router/app_router_names.dart';
 import 'package:expired_app/presentation/widgets/headline_text.dart';
@@ -13,11 +14,14 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeLayoutCubit,HomeLayoutState>(
+    return BlocConsumer<GlobalCubit,GlobalState>(
       listener: (context,state) {},
         builder: (context,state) {
+
+        var global = GlobalCubit.get(context);
+
         return Scaffold(
-          floatingActionButton: HomeLayoutCubit.get(context).currentIndex==1?InkWell(
+          floatingActionButton: global.currentIndex==1?InkWell(
             onTap: (){
               Navigator.pushNamed(context, AppRouterNames.rAddStoreScreenRoute);
             },
@@ -44,7 +48,7 @@ class HomeLayout extends StatelessWidget {
           ):null,
           drawer: const Drawer(),
           appBar: AppBar(
-              title:HeadLineText(text: HomeLayoutCubit.get(context).titlesAppbar[HomeLayoutCubit.get(context).currentIndex],fontSize: 24,),
+              title:HeadLineText(text: global.titlesAppbar[global.currentIndex],fontSize: 24,),
               centerTitle: true,
             actions: const [
               Icon(Icons.notification_add_outlined),
@@ -54,13 +58,13 @@ class HomeLayout extends StatelessWidget {
           ),
           body: Padding(
             padding: EdgeInsets.all(18.r),
-            child: HomeLayoutCubit.get(context).screens[HomeLayoutCubit.get(context).currentIndex],
+            child: global.screens[global.currentIndex],
           ),
 
           bottomNavigationBar: BottomNavigationBar(
-            currentIndex: HomeLayoutCubit.get(context).currentIndex,
+            currentIndex: global.currentIndex,
             onTap: (index){
-              HomeLayoutCubit.get(context).changeNavBar(index);
+              global.changeNavBar(index);
             },
 
             items: const [
