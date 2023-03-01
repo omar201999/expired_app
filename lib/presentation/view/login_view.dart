@@ -1,20 +1,20 @@
 import 'package:expired_app/business_logic/user_cubit/user_cubit.dart';
 import 'package:expired_app/core/constants/assets_manager.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:expired_app/presentation/router/app_router_names.dart';
 import 'package:expired_app/presentation/styles/colors.dart';
 import 'package:expired_app/presentation/widgets/headline_text.dart';
 import 'package:expired_app/presentation/widgets/my_button.dart';
 import 'package:expired_app/presentation/widgets/my_form_field.dart';
 import 'package:expired_app/presentation/widgets/show_toast.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class LoginView extends StatelessWidget {
   LoginView({Key? key}) : super(key: key);
 
-  var emailController = TextEditingController();
+  var userNameController = TextEditingController();
   var passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
@@ -22,9 +22,9 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserStates>(
       listener: (context, state) {
-        if(state is LoginLoadedState)
+        if(state is LoginSuccessState)
         {
-          //Navigator.pushNamedAndRemoveUntil(context, AppRouterNames.rHomeLayoutScreenRoute,(route) => false,arguments:context);
+          Navigator.pushNamedAndRemoveUntil(context, AppRouterNames.rHomeLayoutRoute,(route) => false,);
         }
         else if (state is LoginErrorState){
           showToast(text:state.message, state: ToastStates.ERROR);
@@ -55,10 +55,10 @@ class LoginView extends StatelessWidget {
                           ),
                           MyFormField(
                             //prefix: IconBroken.Message,
-                            hintText: 'Email',
+                            hintText: 'User Name',
                             borderColor:  const Color(0xffE5E5E5),
-
-                            controller: emailController,
+                            //labelText: 'User Name',
+                            controller: userNameController,
                             validateText:'email must not be empty',
                             maxLines: 1,
                             inputType: TextInputType.emailAddress,
@@ -73,7 +73,7 @@ class LoginView extends StatelessWidget {
                             validateText:'password must not be empty',
                             maxLines: 1,
                             borderColor:  const Color(0xffE5E5E5),
-
+                           //labelText: 'Password',
                             inputType: TextInputType.visiblePassword,
                             suffix: UserCubit.get(context).suffixIcon,
                             isPassword: UserCubit.get(context).isPassword,
@@ -87,7 +87,7 @@ class LoginView extends StatelessWidget {
                           state is LoginLoadingState ? const Center(child: CircularProgressIndicator(color: AppColor.primaryColor,),):MyButton(
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                Navigator.pushNamedAndRemoveUntil(context, AppRouterNames.rHomeLayoutRoute,(route) => false,);
+                                UserCubit.get(context).userLogin(userName: userNameController.text, password: passwordController.text);
 
                                 //LoginCubit.get(context).userLogin(context,email: emailController.text, password: passwordController.text);
                               }

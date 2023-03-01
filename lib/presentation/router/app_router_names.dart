@@ -1,5 +1,5 @@
 class AppRouterNames {
-  static const rSplashScreenRoute = '/';
+  //static const rSplashScreenRoute = '/';
 
   static const rLoginScreenRoute = '/';
   static const rEditProductScreenRoute = '/edit_product_screen';
@@ -9,4 +9,7 @@ class AppRouterNames {
   static const rCategoriesScreenRoute = '/categories_screen';
   static const rHomeLayoutRoute = '/home_layout_route';
   static const rAddStoreScreenRoute = '/add_store_screen';
+  static const rEditStoreScreenRoute = '/edit_store_screen';
+  static const rEditCategoryScreenRoute = '/edit_category_screen';
+
 }

@@ -1,5 +1,4 @@
 
-import 'package:dio/dio.dart';
 import 'package:expired_app/core/constants/end_points.dart';
 import 'package:expired_app/core/dio_service/dio_service.dart';
 import 'package:expired_app/core/utils/dio_method.dart';

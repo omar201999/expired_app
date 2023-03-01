@@ -4,7 +4,6 @@ import 'package:expired_app/core/constants/error_messages.dart';
 import 'package:expired_app/core/constants/shared_preferences_consts.dart';
 import 'package:expired_app/core/exceptions/shared_preference_exception.dart';
 import 'package:expired_app/core/shared_preferences/preference_helper.dart';
-
 import 'package:flutter/material.dart';
 
 import 'global_repository.dart';

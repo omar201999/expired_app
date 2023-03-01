@@ -1,5 +1,4 @@
 
-import 'package:expired_app/business_logic/bloc_observer.dart';
 import 'package:expired_app/business_logic/global_cubit/global_cubit.dart';
 import 'package:expired_app/business_logic/user_cubit/user_cubit.dart';
 import 'package:expired_app/core/dio_service/dio_provider.dart';
@@ -18,13 +17,12 @@ import 'package:expired_app/data/repository/global/global_repository.dart';
 import 'package:expired_app/data/repository/global/global_repository_impl.dart';
 import 'package:expired_app/data/repository/user/user_repository.dart';
 import 'package:expired_app/data/repository/user/user_repository_impl.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final serviceLocator = GetIt.instance;
 
 Future initApp() async {
-  Bloc.observer = MyBlocObserver();
+  //Bloc.observer = MyBlocObserver();
 
   /// ui cubit
   serviceLocator.registerFactory(
@@ -35,7 +33,7 @@ Future initApp() async {
 
   serviceLocator.registerFactory(
     () => UserCubit(
-      userRepository: serviceLocator(),
+      //userRepository: serviceLocator(),
     ),
   );
 

@@ -20,6 +20,17 @@ class GetProfileErrorState extends UserStates {
   GetProfileErrorState(this.message);
 }
 
+class LoginErrorState extends UserStates {
+  final String message;
+
+  LoginErrorState(this.message);
+}
+class LoginSuccessState extends UserStates {
+
+}
+
+class LoginLoadingState extends UserStates{}
+
 class LoginSavedLoadingState extends UserStates {}
 
 class LoginSavedLoadedState extends UserStates {
@@ -34,18 +45,12 @@ class LoginSavedErrorState extends UserStates {
   LoginSavedErrorState(this.message);
 }
 
-class LoginLoadingState extends UserStates{}
 class LoginLoadedState extends UserStates {
   final AuthResponseModel responseModel;
 
   LoginLoadedState(this.responseModel);
 }
 
-class LoginErrorState extends UserStates {
-  final String message;
-
-  LoginErrorState(this.message);
-}
 
 class LogoutLoadingState extends UserStates {}
 

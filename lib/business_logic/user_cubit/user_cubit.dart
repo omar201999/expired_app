@@ -1,25 +1,28 @@
 
 import 'package:bloc/bloc.dart';
+import 'package:expired_app/core/constants/constants.dart';
+import 'package:expired_app/core/constants/end_points.dart';
 import 'package:expired_app/core/constants/error_messages.dart';
 import 'package:expired_app/core/utils/string_extension.dart';
+import 'package:expired_app/data/local/cache_helper.dart';
 import 'package:expired_app/data/model/param_model/login_param_model.dart';
 import 'package:expired_app/data/model/response_models/auth_response_model.dart';
 import 'package:expired_app/data/model/user_model.dart';
+import 'package:expired_app/data/remote/web_service.dart';
 import 'package:expired_app/data/repository/user/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserStates> {
 
-  final UserRepository userRepository;
+  //final UserRepository userRepository;
   UserModel? user;
   bool isEng = true;
 
-  UserCubit({required this.userRepository}) : super(LoginInitial());
+  UserCubit() : super(LoginInitial());//{required this.userRepository}
   static UserCubit get(context) => BlocProvider.of(context);
 
   IconData suffixIcon = Icons.visibility_outlined;
@@ -32,21 +35,54 @@ class UserCubit extends Cubit<UserStates> {
     emit(ChangeLoginPasswordVisibility());
   }
 
-  Future getProfile() async {
+  Future userLogin({
+  required String userName,
+  required String password,
+
+})
+  async {
+
+    emit(LoginLoadingState());
+    WebService().publicDio.
+    post(
+        loginEndPoint,
+        data: {
+      "userName": userName,
+      "password": password
+    },
+    ).then((value) {
+      user = UserModel.fromJson(value.data);
+      userId = user!.id;
+      userToken = user!.token;
+      CacheHelper.saveDataSharedPreference(key: 'userId', value: userId);
+      CacheHelper.saveDataSharedPreference(key: 'userToken', value: userToken);
+      CacheHelper.saveDataSharedPreference(key: 'userName', value: userName);
+      CacheHelper.saveDataSharedPreference(key: 'userPassword', value: password);
+      emit(LoginSuccessState());
+    }).catchError((error){
+      emit(LoginErrorState(error.toString()));
+      debugPrint(error.toString());
+    });
+  }
+
+
+
+
+ /* Future getProfile() async {
     emit(GetProfileLoadingState());
-    final result = await userRepository.getProfile(user!.token, isEng: isEng);
+  //final result = await userRepository.getProfile(user!.token, isEng: isEng);
     result.fold(
           (l) {
-        emit(GetProfileErrorState(l));
+
       },
           (r) {
         user = r.user;
-        emit(GetProfileSuccessState());
+
       },
     );
   }
 
-  Future loginSaved() async {
+ Future loginSaved() async {
     emit(LoginSavedLoadingState());
     final result = await userRepository.loginSaved(isEng: isEng);
     result.fold(
@@ -59,6 +95,8 @@ class UserCubit extends Cubit<UserStates> {
       },
     );
   }
+
+
 
   Future login(
       LoginParamModel paramModel,
@@ -102,5 +140,7 @@ class UserCubit extends Cubit<UserStates> {
       },
     );
   }
+  */
+
 
 }
