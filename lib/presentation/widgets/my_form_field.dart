@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../styles/colors.dart';
@@ -27,6 +28,7 @@ class MyFormField extends StatelessWidget {
   final TextAlign textAlign;
    final Color borderColor;
     final int? maxLines;
+    final  List<TextInputFormatter>? inputFormatters;
 
   final Function()? suffixPressed;
   final void Function(String)? onChanged;
@@ -36,7 +38,7 @@ class MyFormField extends StatelessWidget {
     Key? key,
     this.borderRadius = 25,
     this.onTap,
-
+    this.inputFormatters,
     this.autofocus=false,
     this.borderColor=AppColor.borderColorForTextForField,
     required this.controller,
@@ -74,6 +76,7 @@ class MyFormField extends StatelessWidget {
         },
         obscureText: isPassword,
         keyboardType: inputType,
+        inputFormatters:inputFormatters,
         textAlign: textAlign,
         decoration: InputDecoration(
           suffixIcon:suffix == null ? null : IconButton(

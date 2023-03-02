@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:expired_app/presentation/widgets/show_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -126,8 +127,8 @@ class _BuildQRViewState extends State<BuildQRView> {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
         MediaQuery.of(context).size.height < 400)
-        ? 150.0
-        : 300.0;
+        ? 300.0
+        : 200.0;
     // To ensure the Scanner view is properly sizes after rotation
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
@@ -153,6 +154,7 @@ class _BuildQRViewState extends State<BuildQRView> {
         if(result != null)
         {
           widget.barcodeController.text = result!.code!;
+          showToast(text: "Barcode Scanned Successfully", state: ToastStates.SUCCESS);
           //Navigator.pop(context);
         }
       });

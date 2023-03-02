@@ -31,7 +31,7 @@ class BuildCategoryItem extends StatelessWidget {
   builder: (context, state) {
     return InkWell(
       onTap: (){
-        isFromAddCategory ? {newCategoryNameController!.text = nameOfCategory!, scrollController!.animateTo(0, duration: const Duration(milliseconds: 500), curve:Curves.fastOutSlowIn)} :Navigator.pushNamed(context, AppRouterNames.rProductsScreenRoute,arguments: categoryModel.marketId);
+        isFromAddCategory ? {newCategoryNameController!.text = nameOfCategory!, scrollController!.animateTo(0, duration: const Duration(milliseconds: 500), curve:Curves.fastOutSlowIn)} :Navigator.pushNamed(context, AppRouterNames.rProductsScreenRoute,arguments: categoryModel);
       },
       child: Container(
         height: 95.h,

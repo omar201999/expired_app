@@ -1,38 +1,17 @@
-
 class UserModel {
-  final String id;
-  final String name;
-  final String email;
-  final String token;
-  //final String? image;
 
-  const UserModel({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.token,
-    //this.image,
-  });
+  String? fullName;
+  String? userName;
+  String? email;
+  String? phoneNumber;
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'email': email,
-      'api_token': token,
-      //'image': image
-    };
+  UserModel({this.fullName, this.userName, this.email, this.phoneNumber,});
+
+  UserModel.fromJson(Map<String, dynamic> json) {
+    fullName = json['fullName'];
+    userName = json['userName'];
+    email = json['email'];
+    phoneNumber = json['phoneNumber'];
   }
-
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      id: json['id'] as String,
-      name: json['userName'] as String,
-      email: json['email'] as String,
-      token: json['token'] as String,
-      //image: json['image'] as String?,
-    );
-  }
-
 
 }

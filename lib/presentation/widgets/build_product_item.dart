@@ -1,7 +1,9 @@
+import 'package:expired_app/business_logic/product_cubit/product_cubit.dart';
 import 'package:expired_app/data/model/product_model.dart';
 import 'package:expired_app/presentation/widgets/regular_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../styles/colors.dart';
@@ -51,12 +53,15 @@ class BuildProductItem extends StatelessWidget {
               [
                 MediumText(text: productModel.productName!,fontSize: 16.sp,fontWeight: FontWeight.w500,color: AppColor.primaryColor,overflow: TextOverflow.ellipsis,maxLines: 2,),
                 SizedBox(height: 5.h,),
-                RegularText(text: productModel.expireData!,fontSize: 15.sp,fontWeight: FontWeight.w500,color: AppColor.primaryColor,overflow: TextOverflow.ellipsis,maxLines: 1,),
+                //DateFormat('yyyy-MM-dd hh:mm').format(formatDate(expiryDateController.text))
+                RegularText(text: DateFormat.yMMMd().format(formatDate(productModel.expireData!)),fontSize: 15.sp,fontWeight: FontWeight.w500,color: AppColor.primaryColor,overflow: TextOverflow.ellipsis,maxLines: 1,),
               ],
             ),
             ),
             IconButton(
-              onPressed: (){},
+              onPressed: (){
+                ProductCubit.get(context).deleteProduct(productId: productModel.productId!, marketId: productModel.marketId!);
+              },
               icon: const Icon(Icons.delete_forever),
               padding: EdgeInsets.zero,
             ),

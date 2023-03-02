@@ -93,6 +93,7 @@ class EditCategoryScreen extends StatelessWidget {
           } else if (state is UpdateCategoryErrorState) {
             showToast(text: state.error, state: ToastStates.ERROR);
           }
-        });
+        }
+        );
   }
 }

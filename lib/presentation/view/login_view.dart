@@ -88,7 +88,6 @@ class LoginView extends StatelessWidget {
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
                                 UserCubit.get(context).userLogin(userName: userNameController.text, password: passwordController.text);
-
                                 //LoginCubit.get(context).userLogin(context,email: emailController.text, password: passwordController.text);
                               }
                             },

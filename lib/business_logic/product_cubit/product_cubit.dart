@@ -35,7 +35,6 @@ class ProductCubit extends Cubit<ProductState> {
   }
   Future updateProduct({
     required ProductModel productModel
-
   })
   async{
     emit(UpdateProductLoadingState());

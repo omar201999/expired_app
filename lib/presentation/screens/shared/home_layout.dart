@@ -1,4 +1,4 @@
-import 'package:expired_app/business_logic/global_cubit/global_cubit.dart';
+import 'package:expired_app/business_logic/home_layout_cubit/home_layout_cubit.dart';
 import 'package:expired_app/presentation/router/app_router_names.dart';
 import 'package:expired_app/presentation/widgets/headline_text.dart';
 import 'package:flutter/material.dart';
@@ -8,16 +8,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../styles/colors.dart';
 import '../../widgets/regular_text.dart';
 
-class HomeLayout extends StatelessWidget {
+class HomeLayout extends StatefulWidget {
   const HomeLayout({Key? key}) : super(key: key);
 
   @override
+  State<HomeLayout> createState() => _HomeLayoutState();
+}
+
+class _HomeLayoutState extends State<HomeLayout> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<HomeLayoutCubit>(context).getProfileData();
+    BlocProvider.of<HomeLayoutCubit>(context).getExpiryProducts();
+  }
+  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<GlobalCubit,GlobalState>(
+    return BlocConsumer<HomeLayoutCubit,HomeLayoutState>(
       listener: (context,state) {},
         builder: (context,state) {
 
-        var global = GlobalCubit.get(context);
+        var global = HomeLayoutCubit.get(context);
 
         return Scaffold(
           floatingActionButton: global.currentIndex==1?InkWell(

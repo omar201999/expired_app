@@ -2,14 +2,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:expired_app/core/constants/constants.dart';
 import 'package:expired_app/core/constants/end_points.dart';
-import 'package:expired_app/core/constants/error_messages.dart';
-import 'package:expired_app/core/utils/string_extension.dart';
 import 'package:expired_app/data/local/cache_helper.dart';
-import 'package:expired_app/data/model/param_model/login_param_model.dart';
+import 'package:expired_app/data/model/login_model.dart';
 import 'package:expired_app/data/model/response_models/auth_response_model.dart';
-import 'package:expired_app/data/model/user_model.dart';
 import 'package:expired_app/data/remote/web_service.dart';
-import 'package:expired_app/data/repository/user/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -19,7 +15,7 @@ part 'user_state.dart';
 class UserCubit extends Cubit<UserStates> {
 
   //final UserRepository userRepository;
-  UserModel? user;
+  LoginModel? user;
   bool isEng = true;
 
   UserCubit() : super(LoginInitial());//{required this.userRepository}
@@ -38,10 +34,8 @@ class UserCubit extends Cubit<UserStates> {
   Future userLogin({
   required String userName,
   required String password,
-
 })
   async {
-
     emit(LoginLoadingState());
     WebService().publicDio.
     post(
@@ -51,7 +45,7 @@ class UserCubit extends Cubit<UserStates> {
       "password": password
     },
     ).then((value) {
-      user = UserModel.fromJson(value.data);
+      user = LoginModel.fromJson(value.data);
       userId = user!.id;
       userToken = user!.token;
       CacheHelper.saveDataSharedPreference(key: 'userId', value: userId);

@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../widgets/medium_text.dart';
-
 class StoresScreen extends StatelessWidget {
   const StoresScreen({Key? key}) : super(key: key);
 

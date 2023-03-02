@@ -18,6 +18,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   Future addNewCategory({
     required String categoryName,
     required int marketId,
+    required int daysToReminderBeforeExpire,
   })
   async{
     emit(AddNewCategoryLoadingState());
@@ -25,7 +26,7 @@ class CategoryCubit extends Cubit<CategoryState> {
         addCategoryEndPoint,
         data: {
           "sellerId": userId,
-          "dayesToReminderBeforExpire": 0,
+          "dayesToReminderBeforExpire": daysToReminderBeforeExpire,
           "marketId": marketId,
           "name": categoryName
         }).then((value) {
@@ -156,7 +157,7 @@ class CategoryCubit extends Cubit<CategoryState> {
       case 'eggs,meat&fish':
         return false;
       case 'makeup':
-        return false;
+        return true;
       default:
         return false;
     }

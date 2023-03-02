@@ -1,5 +1,7 @@
 const String baseApiUrl = 'http://www.expireapi.somee.com/api/';
-const String profileGetEndPoint = '/';
+const String getProfileOfSellerEndPoint = 'Seller/GetSellerByIdWithData';
+const String getAllExpiryProductsEndPoint = 'Product/GetAllExpiryProducts';
+const String getReminderExpiryProductsEndPoint = 'Product/GetReminderExpiryProducts';
 const String version = '/';
 const String loginEndPoint = 'Auth/Login';
 const String addStoreEndPoint = 'Market/AddMarket';

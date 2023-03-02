@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../data/model/category_model.dart';
 import '../../router/app_router_names.dart';
 import '../../styles/colors.dart';
 import '../../styles/icon_broken.dart';
 import '../../widgets/headline_text.dart';
 
 class ProductsScreen extends StatefulWidget {
-  final int marketId;
+  final CategoryModel categoryModel;
 
-  const ProductsScreen({Key? key, required this.marketId}) : super(key: key);
+  const ProductsScreen({Key? key, required this.categoryModel}) : super(key: key);
 
   @override
   State<ProductsScreen> createState() => _ProductsScreenState();
@@ -23,8 +24,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ProductCubit>(context)
-        .getAllProducts(marketId: widget.marketId);
+    BlocProvider.of<ProductCubit>(context).getAllProducts(marketId:widget.categoryModel.marketId!);
   }
 
   @override
@@ -35,8 +35,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
         return Scaffold(
           floatingActionButton: InkWell(
             onTap: () {
-              Navigator.pushNamed(
-                  context, AppRouterNames.rAddProductScreenRoute);
+              Navigator.pushNamed(context, AppRouterNames.rAddProductScreenRoute,arguments: widget.categoryModel);
             },
             child: Container(
               decoration: BoxDecoration(
@@ -79,7 +78,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) => InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, AppRouterNames.rEditProductScreenRoute);
+                    Navigator.pushNamed(context, AppRouterNames.rEditProductScreenRoute,arguments: ProductCubit.get(context).allProducts![index]);
                   },
                   child: BuildProductItem(productModel: ProductCubit.get(context).allProducts![index],),
                 ),

@@ -1,9 +1,13 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:expired_app/business_logic/home_layout_cubit/home_layout_cubit.dart';
 import 'package:expired_app/presentation/styles/colors.dart';
 import 'package:expired_app/presentation/widgets/medium_text.dart';
 import 'package:expired_app/presentation/widgets/regular_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../widgets/build_alert_item.dart';
 import '../../widgets/deadtitle_with_icon.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,13 +15,18 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<HomeLayoutCubit, HomeLayoutState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children:
         [
-          MediumText(text: 'Hi, Omar Essam ',fontSize: 16.sp,fontWeight: FontWeight.w500,),
+          MediumText(text: 'Hi, ${HomeLayoutCubit.get(context).userModel!=null?HomeLayoutCubit.get(context).userModel!.fullName!:''}',fontSize: 16.sp,fontWeight: FontWeight.w500,maxLines: 3),
           SizedBox(height: 20.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -93,42 +102,21 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: 25.h,),
           RegularText(text: 'Alerts',fontSize: 14.sp,fontWeight: FontWeight.w500,),
           SizedBox(height: 25.h,),
-          SizedBox(
-            height: 80.h,
-            child: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context,index) => Container(
-                  height: 80.h,
-                  width: 160.w,
-                  decoration: BoxDecoration(
-                    color: AppColor.buttonNavigationBarColor,
-                    borderRadius: BorderRadius.all(Radius.circular(12.r),),
-                    border: Border.all(color: const Color(0xffcac4d0),width: 1.w,style: BorderStyle.solid),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(12.r),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:
-                      [
-                        Row(
-                          children: [
-                            Expanded(child: MediumText(text: 'Expiring Soon',fontSize: 16.sp,fontWeight: FontWeight.w500,color: AppColor.black,)),
-                            const Icon(Icons.error,color: Color(0xffE46962)),
-                          ],
-                        ),
-                        SizedBox(height: 8.h),
-                        RegularText(text: 'Fanta',fontSize: 14.sp,fontWeight: FontWeight.w400,color: AppColor.black,),
-                      ],
-                    ),
-                  ),
-                ) ,
-                separatorBuilder: (context,index) => SizedBox(width: 10.w,),
-                itemCount: 10,
-            ),
+          ConditionalBuilder(
+            condition: HomeLayoutCubit.get(context).allExpiryProducts != null && HomeLayoutCubit.get(context).allExpiryProducts!.isNotEmpty ,
+           builder: (context)=>SizedBox(
+             height: 80.h,
+             child: ListView.separated(
+               physics: const BouncingScrollPhysics(),
+               padding: EdgeInsets.zero,
+               shrinkWrap: true,
+               scrollDirection: Axis.horizontal,
+               itemBuilder: (context,index) => BuildAlertItem(expiryProductsModel: HomeLayoutCubit.get(context).allExpiryProducts![index]) ,
+               separatorBuilder: (context,index) => SizedBox(width: 10.w,),
+               itemCount:  HomeLayoutCubit.get(context).allExpiryProducts!.length,
+             ),
+           ),
+            fallback: (context) => const Center(child: CircularProgressIndicator(color: AppColor.primaryColor,)),
           ),
           SizedBox(height: 20.h,),
           Divider(
@@ -264,6 +252,8 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
+  },
+);
   }
 }
 /*

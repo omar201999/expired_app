@@ -2,6 +2,7 @@ import 'package:expired_app/category_cubit/category_cubit.dart';
 import 'package:expired_app/core/constants/assets_manager.dart';
 import 'package:expired_app/data/model/category_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,6 +20,7 @@ class AddCategoryScreen extends StatelessWidget {
   final int marketId;
 
   var newCategoryNameController = TextEditingController();
+  var daysToReminderBeforeExpireController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   ScrollController scrollController = ScrollController();
   @override
@@ -58,6 +60,34 @@ class AddCategoryScreen extends StatelessWidget {
                     inputType: TextInputType.name,
                   ),
                   SizedBox(
+                    height: 20.h,
+                  ),
+                  RegularText(
+                    text: 'How many days do you want to be reminded before a category expires?',
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500,
+                    maxLines: 4,
+                    lineHeight: 1.5,
+
+                    //overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  MyFormField(
+                    prefix: Icons.view_day,
+                    hintText: 'Days To Reminder Before Expire',
+                    labelText: 'Days To Reminder Before Expire',
+                    borderColor: const Color(0xffE5E5E5),
+                    controller: daysToReminderBeforeExpireController,
+                    validateText: 'this files must not be empty',
+                    maxLines: 1,
+                    inputType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
+                  ),
+                  SizedBox(
                     height: 25.h,
                   ),
                   BlocConsumer<CategoryCubit, CategoryState>(
@@ -81,11 +111,9 @@ class AddCategoryScreen extends StatelessWidget {
                             )
                           : MyButton(
                               onPressed: () {
+                                print(daysToReminderBeforeExpireController.text);
                                 if (formKey.currentState!.validate()) {
-                                  CategoryCubit.get(context).addNewCategory(
-                                      categoryName:
-                                          newCategoryNameController.text,
-                                      marketId: marketId);
+                                  CategoryCubit.get(context).addNewCategory(categoryName: newCategoryNameController.text, marketId: marketId, daysToReminderBeforeExpire: int.parse(daysToReminderBeforeExpireController.text));
                                 }
                               },
                               text: 'Add',

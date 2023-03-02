@@ -11,8 +11,10 @@ class ProductModel {
   int? categoryId;
   int? marketId;
   String? sellerId;
+  Category? category;
+  Market? market;
 
-  ProductModel({this.productId, this.productName, this.barCode, this.price, this.currencyCode, this.quantity, this.createdAt, this.expireData, this.daysToReminderBeforeExpire, this.categoryId, this.marketId, this.sellerId});
+  ProductModel({ this.market, this.category,this.productId, this.productName, this.barCode, this.price, this.currencyCode, this.quantity, this.createdAt, this.expireData, this.daysToReminderBeforeExpire, this.categoryId, this.marketId, this.sellerId});
   ProductModel.fromJson(Map<String, dynamic> json) {
     productId = json['id'];
     productName = json['name'];
@@ -26,6 +28,8 @@ class ProductModel {
     categoryId = json['categoryId'];
     marketId = json['marketId'];
     sellerId = json['sellerId'];
+    category = json['category'] != null ?  Category.fromJson(json['category']) : null;
+    market = json['market'] != null ?  Market.fromJson(json['market']) : null;
   }
   Map<String, dynamic> toJsonForAdd() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -56,6 +60,26 @@ class ProductModel {
     data['marketId'] = marketId;
     data['sellerId'] = sellerId;
     return data;
+  }
+
+}
+
+
+class Category {
+  String? name;
+  Category({this.name,});
+  Category.fromJson(Map<String, dynamic> json) {
+    name = json['name'] as String;
+  }
+
+}
+
+class Market {
+
+  String? name;
+  Market({this.name});
+  Market.fromJson(Map<String, dynamic> json) {
+    name = json['name'] as String;
   }
 
 }

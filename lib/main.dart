@@ -1,5 +1,6 @@
 import 'package:expired_app/business_logic/bloc_observer.dart';
 import 'package:expired_app/business_logic/global_cubit/global_cubit.dart';
+import 'package:expired_app/business_logic/home_layout_cubit/home_layout_cubit.dart';
 import 'package:expired_app/business_logic/product_cubit/product_cubit.dart';
 import 'package:expired_app/business_logic/user_cubit/user_cubit.dart';
 import 'package:expired_app/category_cubit/category_cubit.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => serviceLocator<UserCubit>(),),
             BlocProvider(create: (context) => StoreCubit()..getAllStores(),),
             BlocProvider(create: (context) => CategoryCubit()),
+            BlocProvider(create: (context) => HomeLayoutCubit()),
             BlocProvider(create: (context) => ProductCubit()),
           ],
           child: BlocConsumer<GlobalCubit, GlobalState>(

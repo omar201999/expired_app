@@ -1,5 +1,6 @@
 
 import 'package:expired_app/core/constants/constants.dart';
+import 'package:expired_app/data/model/product_model.dart';
 import 'package:expired_app/data/model/store_model.dart';
 import 'package:expired_app/presentation/screens/user/add_product_screen.dart';
 import 'package:expired_app/presentation/screens/user/add_store_screen.dart';
@@ -51,17 +52,19 @@ class AppRouter {
           builder: (_) =>  const HomeLayout(),
         );
         case AppRouterNames.rAddProductScreenRoute:
-        return MaterialPageRoute(
-          builder: (_) =>   AddProductScreen(),
+          final categoryModel =settings.arguments as CategoryModel;
+          return MaterialPageRoute(
+          builder: (_) =>   AddProductScreen(categoryModel: categoryModel,),
         );
         case AppRouterNames.rProductsScreenRoute:
-          final marketId =settings.arguments as int;
+          final categoryModel =settings.arguments as CategoryModel;
           return MaterialPageRoute(
-          builder: (_) => ProductsScreen(marketId: marketId,),
+          builder: (_) => ProductsScreen(categoryModel: categoryModel,),
         );
         case AppRouterNames.rEditProductScreenRoute:
-        return MaterialPageRoute(
-          builder: (_) =>   EditProductScreen(),
+          final productModel =settings.arguments as ProductModel;
+          return MaterialPageRoute(
+          builder: (_) =>   EditProductScreen(productModel: productModel,),
         );
       case AppRouterNames.rEditStoreScreenRoute:
         final storeModel = settings.arguments as StoreModel;

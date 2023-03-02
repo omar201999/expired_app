@@ -20,7 +20,7 @@ class RemoteUserDataSourceImpl implements RemoteUserDataSource {
   Future<AuthResponseModel> getProfile(String token) async {
     final result = await serverRequest(
       call: () async => await dioService.get(
-        endPoint: profileGetEndPoint,
+        endPoint: getProfileOfSellerEndPoint,
         token: token,
       ),
     );
